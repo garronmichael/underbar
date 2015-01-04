@@ -48,9 +48,9 @@
   _.each = function(collection, iterator) {
    if (Array.isArray(collection)) {
     for(var i = 0; i < collection.length; i++) { iterator(collection[i], i, collection); }       
-    } else {
+   } else {
     for(var i in collection) { iterator(collection[i], i, collection); }
-    } 
+   } 
   };
 
   // Returns the index at which value can be found in the array, or -1 if value
@@ -72,6 +72,13 @@
 
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, test) {
+    var passed = [];
+    for(var i = 0; i < collection.length; i++) {
+      if (test(collection[i])) {
+        passed.push(collection[i]);
+      }
+    }
+    return passed; 
   };
 
   // Return all elements of an array that don't pass a truth test.
