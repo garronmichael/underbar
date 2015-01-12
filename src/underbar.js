@@ -217,6 +217,23 @@
   // provided, provide a default one
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
+   /* if(iterator) {
+      if (_.every(collection, iterator)) {
+        return true;
+      } else if(_.contains(collection, iterator)) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      if (_.every(collection, function(x, y) {})) {
+        return true;
+      } else if(_.contains(collection, function(x, y){})) {
+        return true;
+      } else {
+        return false;
+      }
+    } */
   };
 
 
@@ -239,6 +256,12 @@
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
   _.extend = function(obj) {
+    for (var i = 1; i < arguments.length; i++) {
+      for(var j in arguments[i]) {
+        obj[j] = arguments[i][j];
+      }
+    }
+    return obj;
   };
 
   // Like extend, but doesn't ever overwrite a key that already
