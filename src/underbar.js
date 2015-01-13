@@ -322,7 +322,7 @@
     var pastArgs = [];
     return function(args) {
       if (_.contains(pastArgs, args)) {        
-        return results[0];
+        return results[_.indexOf(pastArgs, args)];
       } else if (!_.contains(pastArgs, args)) {
         var current = func.apply(this, arguments);
         results.push(current);
