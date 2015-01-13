@@ -217,23 +217,16 @@
   // provided, provide a default one
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
-   /* if(iterator) {
-      if (_.every(collection, iterator)) {
-        return true;
-      } else if(_.contains(collection, iterator)) {
-        return true;
+    /*return _.reduce(collection, function(x, y) {
+      if(iterator) {
+        if(x !== Boolean(iterator(y)) {
+          return true;
+        }
       } else {
-        return false;
+        return x;
       }
-    } else {
-      if (_.every(collection, function(x, y) {})) {
-        return true;
-      } else if(_.contains(collection, function(x, y){})) {
-        return true;
-      } else {
-        return false;
-      }
-    } */
+    }, false)
+*/
   };
 
 
@@ -358,6 +351,17 @@
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
+    var shuffled = array.slice(0);
+    var x = shuffled.length;
+    var t;
+    var i;
+    while(x) {
+      i = Math.floor(Math.random() * x--)
+      t = shuffled[x];
+      shuffled[x] = shuffled[i];
+      shuffled[i] = t;
+    }
+    return shuffled;
   };
 
 
