@@ -318,25 +318,16 @@
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
-    var myParameters = [];
-    var myResults = [];
-    var counter = 0;
-    return function() {
-      if(myParameters.length === 0) {        
-        myParameters.push(arguments);
-        myResults.push(func.apply(this, arguments));
-        counter++;
-        return func.apply(this, arguments);  
-      }
-      for(var i = 0; i < counter; i++) {
-        if (arguments !== myParameters[i]) {
-          myParameters.push(arguments);
-          myResults.push(func.apply(this, arguments));
-          counter++;
-          return func.apply(this, arguments);
-        } else {
-          return myResults[i];
-        }
+    var results = [];
+    var pastArgs = [];
+    return function(args) {
+      if (_.contains(pastArgs, args)) {        
+        return results[0];
+      } else if (!_.contains(pastArgs, args)) {
+        var current = func.apply(this, arguments);
+        results.push(current);
+        pastArgs.push(args);
+        return current;
       }
     }
   };
