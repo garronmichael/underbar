@@ -217,16 +217,29 @@
   // provided, provide a default one
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
-    /*return _.reduce(collection, function(x, y) {
-      if(iterator) {
-        if(x !== Boolean(iterator(y)) {
-          return true;
-        }
+    if(collection.length === 0) {
+      return false;
+    }
+
+    if(iterator) {
+      if(_.every(collection, iterator)) {
+        return true;
+      } else if (_.reduce(collection, function(a, b) {
+          return a === iterator(b);          
+        }, true)) {
+        return true;
       } else {
-        return x;
+        return false;
       }
-    }, false)
-*/
+    } else {
+      return _.reduce(collection, function(a, b) {
+        if(a) {
+          return a === b;
+        } else {
+          return false;
+        }
+      }, false);
+    }
   };
 
 
