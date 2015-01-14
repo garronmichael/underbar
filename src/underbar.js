@@ -232,13 +232,13 @@
         return false;
       }
     } else {
-      return _.reduce(collection, function(a, b) {
-        if(a) {
-          return a === b;
-        } else {
-          return false;
+        for(var i = 0; i < collection.length; i++) {
+          if(collection[i]) {
+            return true;
+          } else {
+            return false;
+          }
         }
-      }, false);
     }
   };
 
