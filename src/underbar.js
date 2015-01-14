@@ -222,14 +222,12 @@
     }
 
     if(iterator) {
-      if(_.every(collection, iterator)) {
-        return true;
-      } else if (_.reduce(collection, function(a, b) {
-          return a === iterator(b);          
-        }, true)) {
-        return true;
-      } else {
-        return false;
+      for(var i = 0; i < collection.length; i++) {
+        if(iterator(collection[i])) {
+          return true;
+        } else {
+          return false;
+        }
       }
     } else {
         for(var i = 0; i < collection.length; i++) {
